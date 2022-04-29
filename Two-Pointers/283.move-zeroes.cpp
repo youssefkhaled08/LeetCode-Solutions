@@ -8,18 +8,25 @@
 class Solution {
 public:
     void moveZeroes(vector<int>& nums) {
-        int lastFoundZero = 0;
-
-        for (int i = 0; i < nums.size(); i++)
-        {
-            if (nums[i] != 0)
-                nums[lastFoundZero++] = nums[i];
-            
-        }
-
-        for (int i = lastFoundZero; i < nums.size(); i++)
-            nums[i] = 0;
+        int length = nums.size();
         
+        if (length <= 1)
+            return;
+        
+        int zeroPtr = 0;
+        int numPtr = 0;
+
+        while (numPtr < length)
+        {
+            if (nums[numPtr] == 0)
+                numPtr++;
+            else
+            {
+                swap(nums[zeroPtr], nums[numPtr]);
+                numPtr++;
+                zeroPtr++;
+            }
+        }
     }
 };
 // @lc code=end
