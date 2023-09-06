@@ -5,17 +5,10 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
-        index1 = 0
-        index2 = 1
-        
-        while index1 < len(nums):
-            if nums[index1] +  nums[index2] == target:
-                break
-            else:
-                index2 += 1
+        indicies = {}
+        for i in range(len(nums)):
+            numToFind = target - nums[i]
+            if numToFind in indicies:
+                return [i, indicies[numToFind]]
+            indicies[nums[i]] = i
             
-            if index2 == len(nums):
-                index1 += 1
-                index2 = index1 + 1
-        
-        return [index1, index2]
