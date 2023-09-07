@@ -7,7 +7,7 @@ class Solution(object):
         left = 0
         right = len(s) - 1
         
-        while left <= right:
+        while left < right:
             if not s[left].isalpha() and not s[left].isdigit():
                 left += 1
             elif not s[right].isalpha() and not s[right].isdigit():
