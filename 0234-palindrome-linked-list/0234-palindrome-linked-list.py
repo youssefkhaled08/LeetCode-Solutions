@@ -9,19 +9,34 @@ class Solution(object):
         :type head: ListNode
         :rtype: bool
         """
-        values = []
-        ptr = head
-        while ptr:
-            values.append(ptr.val)
-            ptr = ptr.next
+        slow = fast = head
+        # Getting (slow) to the middle of the linked list.
+        while fast and fast.next:
+            slow = slow.next 
+            fast = fast.next.next
             
-        left = 0
-        right =  len(values) - 1
+        # Reversing the second half of the linked list.
+        previous = slow
+        slow = slow.next
+        previous.next = None
         
-        while left < right:
-            if values[left] != values[right]:
+        while slow:
+            temp = slow.next
+            slow.next = previous
+            previous = slow
+            slow = temp
+        
+        # Checking if palindrome
+        fast = head
+        slow = previous
+        
+        while slow:
+            if slow.val != fast.val:
                 return False
-            left += 1
-            right -= 1
-            
+            slow = slow.next
+            fast = fast.next
+        
         return True
+        
+            
+        
