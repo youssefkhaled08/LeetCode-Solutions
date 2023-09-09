@@ -4,9 +4,14 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        uniques = set()
         for num in nums:
-            if num in uniques:
-                return num
-            uniques.add(num)
-        return -1
+            current = abs(num)
+            if nums[current] < 0:
+                duplicate = current
+                break
+            nums[current] *= -1
+            
+        for i in range(len(nums)):
+            nums[i] = abs(nums[i])
+            
+        return duplicate
