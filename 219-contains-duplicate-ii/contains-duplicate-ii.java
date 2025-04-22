@@ -4,14 +4,19 @@ class Solution {
             return false;
         
         Set<Integer> window = new HashSet<>();
+        int left = 0;
+        int right = 0;
 
-        for(int i = 0; i < nums.length; i++){
-            if(window.contains(nums[i]))
+        while(right < nums.length){
+            if(right - left > k){
+                window.remove(nums[left]);
+                left++;
+            }
+            if (window.contains(nums[right]))
                 return true;
+            window.add(nums[right]);
+            right++;
 
-            window.add(nums[i]);
-            if(i >= k)
-                window.remove(nums[i-k]);
         }
 
         return false;
